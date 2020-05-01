@@ -106,19 +106,22 @@ class player:
                 #check vertical
                 secindex1 = self.__moveDown__(index)
                 secindex2 = self.__moveUp__(index)
-                if board[secindex1[0]][secindex1[1]] == 0 and board[secindex2[0]][secindex2[1]] == 0:
+                if (secindex1 == None or board[secindex1[0]][secindex1[1]] == 0) and (secindex2 == None or board[secindex2[0]][secindex2[1]] == 0):
                     #letter is open to make word from up/down or vertically
-                    openWords.append([board[index[0]][index[1]], [index, 'D']])
-                    openWords.append([board[index[0]][index[1]], [index, 'U']])
+                    if secindex1 != None:
+                        openWords.append([board[index[0]][index[1]], [index, 'D']])
+                    if secindex2 != None:
+                        openWords.append([board[index[0]][index[1]], [index, 'U']])
                     vertical_direction = False
-                
                 #check horizontal
                 secindex1 = self.__moveLeft__(index)
                 secindex2 = self.__moveRight__(index)
-                if board[secindex1[0]][secindex1[1]] == 0 and board[secindex2[0]][secindex2[1]] == 0:
+                if (secindex1 == None or board[secindex1[0]][secindex1[1]] == 0) and (secindex2 == None or board[secindex2[0]][secindex2[1]] == 0):
                     #letter is open to make word from left/right or horizontally
-                    openWords.append([board[index[0]][index[1]], [index, 'L']])
-                    openWords.append([board[index[0]][index[1]], [index, 'R']])
+                    if secindex1 != None:
+                        openWords.append([board[index[0]][index[1]], [index, 'L']])
+                    if secindex2 != None:
+                        openWords.append([board[index[0]][index[1]], [index, 'R']])
                     horizontal_direction = False
             else:
                 #doesnot contains word
@@ -129,18 +132,18 @@ class player:
             #direction in which to move
             if vertical_direction:
                 secindex = self.__moveDown__(index)
-                if board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
+                if secindex != None and board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
                     toVisitIndex.append(secindex)
                 secindex = self.__moveUp__(index)
-                if board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
+                if secindex != None and board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
                     toVisitIndex.append(secindex)
                 
             if horizontal_direction:
                 secindex = self.__moveRight__(index)
-                if board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
+                if secindex != None and board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
                     toVisitIndex.append(secindex)
                 secindex = self.__moveLeft__(index)
-                if board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
+                if secindex != None and board[secindex[0]][secindex[1]] != 0 and secindex not in visitedIndex:
                     toVisitIndex.append(secindex)
     
             if len(toVisitIndex) == 0:
