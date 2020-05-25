@@ -5,6 +5,29 @@ Created on Sat Apr 11 16:49:21 2020
 @author: Armaghan Khan
 """
 
+"""
+NOTE: 
+    Following dependencies must be installed:
+    1-numpy
+    2-nltk
+    
+    To download numpy simply run following command in cmd
+    
+    pip install numpy
+    
+    To download nltk simply run following command in cmd
+    
+    pip install nltk
+    
+    One last step:
+        open python console in cmd by typing python and press enter
+        now write following command in console and press enter
+        
+        >>> nltk.download('words')
+        
+        wait for download to complete and after that you are good to go
+"""
+
 from gameBoard import gameBoard
 from player import player
 
@@ -40,15 +63,17 @@ while True:
             print('Score:', player2.__score__)
             print('Loser: ', player1.__name__)
             print('Score:', player1.__score__)
+        print('Total Words Made: ', game.getCreatedWords())
         break
-    word = p.playTurn(game.__game_board__)
+    #Data Structure of word: ['Word', [[Index X, Index Y], 'Direction']]
+    word = p.playTurn(game.__game_board__, game.getCreatedWords())
     print('Main:Word: ', word)
     if word == -1:
 #        counter = counter + 1
         p.__unable_counter__ = p.__unable_counter__ + 1
     else:
         detail = game.word_placement(word[0], word[1], word[2])
-        if detail != None:
+        if detail != -2:
             new_words = game.getLetters(len(detail[1]))
             p.updateInfo(new_words, detail[1], detail[0])
         else:
