@@ -2,7 +2,7 @@
 """
 Created on Wed Apr 29 00:23:33 2020
 
-@author: KHAN
+@author: Armaghan Khan
 """
 
 from nltk.corpus import words
@@ -163,7 +163,7 @@ class player:
         return openWords
     
     #function to play
-    def playTurn(self, board):
+    def playTurn(self, board, word_created):
         board_empty = False
         opennings_details = self.__perceptBoard__(board)
         #getting unique opennigs from openning_details
@@ -187,15 +187,23 @@ class player:
 #            print('Words2: ', str(words))
         else:
             words = self.__findWordWithSpecificStarting__(words, unique_opennings)
-        #selecting word randomly from words
+        #selecting word which is not used before
         if len(words) > 0:
-            selected_word = words[randrange(0, len(words))]
+            for x in range(len(words)):
+                selected_word = words[x]
+                if selected_word.upper() in word_created:
+                    if x == len(words) - 1:
+                        return -1
+                    continue
+                else:
+                    break
         else:
             return -1
         
         if board_empty:
             param = opennings_details[randrange(0, len(opennings_details))][1]
         else:
+            #Data Structure of x: ['Start/End Letter', [[ Index X, Index Y], 'Direction']]
             seclist = [x for x in opennings_details if x[0] == selected_word[0].upper() and (x[1][1] == 'R' or x[1][1] == 'D')]
             if len(seclist) == 0:
                 seclist = [x for x in opennings_details if x[0] == selected_word[-1].upper() and (x[1][1] == 'L' or x[1][1] == 'U')]
