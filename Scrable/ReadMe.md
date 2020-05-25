@@ -12,3 +12,5 @@ now type following lines
 import nltk
 nltk.download('words')
 wait for completion and now you are done
+
+If any bug found please report
