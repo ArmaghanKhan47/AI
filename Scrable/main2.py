@@ -26,6 +26,8 @@ NOTE:
         >>> nltk.download('words')
         
         wait for download to complete and after that you are good to go
+        
+    It also suffers from deprivation of making words
 """
 
 from gameBoard import gameBoard
