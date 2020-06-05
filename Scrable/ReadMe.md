@@ -1,3 +1,7 @@
+This Project is not based on ML. and it also doesn't use adversial search.
+
+I will implement Adversial Search soon.
+
 To run this program following dependencies must be installed:
 1-numpy
 2-nltk
